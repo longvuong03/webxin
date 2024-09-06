@@ -1,171 +1,197 @@
-import React, { useState, useEffect } from 'react';
-import ReactPaginate from 'react-paginate';
-import Table from 'react-bootstrap/Table';
-import { getbyidProduct, deleteProduct, fetchAllProduct } from '../../services/ProductService';
-import ModalAddProduct from './ModalAddProduct';
-import Button from 'react-bootstrap/Button';
-import ModalEditProduct from './ModalEditProduct';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import ReactPaginate from "react-paginate";
+import Table from "react-bootstrap/Table";
+import { getbyidProduct, deleteProduct, fetchAllProduct } from "../../services/ProductService";
+import ModalAddProduct from "./ModalAddProduct";
+import Button from "react-bootstrap/Button";
+import ModalEditProduct from "./ModalEditProduct";
+import { useNavigate } from "react-router-dom";
 import Nav from "../AdminComponents/Navs";
-import _ from "lodash"
+import _ from "lodash";
+import "../../asset/css/table-product.css";
+import { format } from "date-fns";
+
+const MAX_DESCRIPTION_LENGTH = 30;
+
+const FormattedDate = ({ createdAt }) => {
+  const date = new Date(createdAt);
+  return <span>{format(date, "dd MMM yyyy, HH:mm")}</span>;
+};
+
+const truncateDescription = (description, maxLength) => {
+  return description.length > maxLength ? description.substring(0, maxLength) + "..." : description;
+};
 
 const TableProduct = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [isCheckingAuth, setIsCheckingAuth] = useState(true);
-    const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
+  const [listProducts, setListProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [totalProducts, setTotalProducts] = useState(0);
+  const [totalPage, setTotalPage] = useState(0);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [isShow, setShow] = useState(false);
+  const [isShowEdit, setShowedit] = useState(false);
+  const [dataProductEdit, setDataProductEdit] = useState({});
+  const navigate = useNavigate();
 
-    const [listProducts, setListProducts] = useState([]);
-    const [totalProducts, setTotalProducts] = useState(0);
-    const [totalPage, setTotalPage] = useState(0);
+  const checkAuth = () => {
+    const session = sessionStorage.getItem("user");
+    setIsLoggedIn(!!session);
+    setIsCheckingAuth(false);
+  };
 
-    const [isShow, setShow] = useState(false);
-    const [isShowEdit, setShowedit] = useState(false);
-    const [dataProductEdit, setDataProductEdit] = useState({});
-    const handleClose = () => { setShow(false); setShowedit(false) }
-    const handleShow = () => setShow(true);
+  useEffect(() => {
+    checkAuth();
+  }, []);
 
-    const checkAuth = () => {
-        const session = sessionStorage.getItem('user');
-        const userIsAuthenticated = session ? true : false;
-        setIsLoggedIn(userIsAuthenticated);
-        setIsCheckingAuth(false);
-    };
-
-    useEffect(() => {
-        checkAuth();
-    }, []);
-
-    useEffect(() => {
-        if (!isCheckingAuth) {
-            if (!isLoggedIn) {
-                navigate('/logins');
-            } else {
-                getProducts(1);
-            }
-        }
-    }, [isLoggedIn, isCheckingAuth, navigate]);
-
-    if (isCheckingAuth) {
-        return <div>Loading...</div>;
+  useEffect(() => {
+    if (!isCheckingAuth) {
+      if (isLoggedIn) {
+        getProducts(1);
+      } else {
+        navigate("/logins");
+      }
     }
+  }, [isLoggedIn, isCheckingAuth, navigate]);
 
-    const handleUpdateTable = (product) => {
-        setListProducts([product, ...listProducts]);
+  const getProducts = async (page) => {
+    try {
+      const res = await fetchAllProduct(page);
+      if (res && res.length > 0) {
+        const sortedProducts = _.sortBy(res, "id");
+        setTotalProducts(res.total);
+        setListProducts(sortedProducts);
+        setFilteredProducts(sortedProducts); // Set filteredProducts to the full list
+        setTotalPage(Math.ceil(res.total_page));
+      } else {
+        console.log("No data received");
+      }
+    } catch (error) {
+      console.error("Error fetching products:", error);
     }
+  };
 
-    const handleEditProductFromModal = (product) => {
-        let cloneListProducts = _.cloneDeep(listProducts);
-        let index = listProducts.findIndex(item => item.id === product.id);
-        cloneListProducts[index].img = product.img;
-        cloneListProducts[index].nameProduct = product.nameProduct;
-        cloneListProducts[index].quantity = product.quantity;
-        cloneListProducts[index].price = product.price;
-        setListProducts(cloneListProducts);
+  useEffect(() => {
+    const filtered = listProducts.filter(product =>
+      product.nameProduct.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredProducts(filtered);
+  }, [searchTerm, listProducts]);
+
+  const handlePageClick = (event) => {
+    getProducts(event.selected + 1);
+  };
+
+  const handleDeleteProduct = async (id) => {
+    try {
+      await deleteProduct(id);
+      getProducts(1);
+    } catch (error) {
+      console.error("Error deleting product:", error);
+      getProducts(1);
     }
+  };
 
-    const getProducts = async (page) => {
-        try {
-            let res = await fetchAllProduct(page);
-            if (res && res.length > 0) {
-                setTotalProducts(res.total);
-                setListProducts(res);
-                setTotalPage(Math.ceil(res.total_page));
-            } else {
-                console.log("No data received");
-            }
-        } catch (error) {
-            console.error("Error fetching products:", error);
-        }
+  const handleShowGetByIdProduct = async (id) => {
+    try {
+      const res = await getbyidProduct(id);
+      if (res && res.id) {
+        setDataProductEdit(res);
+        setShowedit(true);
+      } else {
+        console.log("No data received");
+      }
+    } catch (error) {
+      console.error("Error fetching product:", error);
     }
+  };
 
-    const handlePageClick = (event) => {
-        getProducts(event.selected + 1);
-    }
-
-    const handleDeleteProduct = async (id) => {
-        try {
-            await deleteProduct(id);
-            getProducts(1);
-        } catch (error) {
-            console.error("Error deleting product:", error);
-            getProducts(1);
-        }
-    }
-
-    const handleShowGetByIdProduct = async (id) => {
-        try {
-            let res = await getbyidProduct(id);
-            if (res && res.id) {
-                setDataProductEdit(res);
-                setShowedit(true);
-            } else {
-                console.log("No data received");
-            }
-        } catch (error) {
-            console.error("Error fetching product:", error);
-        }
-    }
-
-    return (
-        <>
-            <Nav />
-            <div className="container">
-                <div className="my-3 d-flex justify-content-between">
-                    <span className='fs-3 text-white'>List Product:</span>
-                    <button className='btn btn-success' onClick={handleShow}>Add new product</button>
-                </div>
-                <Table className='bg-white'>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Image</th>
-                            <th>sl</th>
-                            <th>Name</th>
-                            <th>Price</th>
-                            <th>Option</th>
-                        </tr>
-                    </thead>
-                    <tbody className='fs-4'>
-                        {listProducts && listProducts.length > 0 && listProducts.map((product, index) => {
-                            return (
-                                <tr key={index}>
-                                    <td>{product.id}</td>
-                                    <td><img style={{ width: 80 }} src={product.img} alt={product.nameProduct} /></td>
-                                    <td>{product.quantity}</td>
-                                    <td>{product.nameProduct}</td>
-                                    <td>{product.price}</td>
-                                    <td>
-                                        <Button onClick={() => handleShowGetByIdProduct(product.id)} variant="warning">Edit</Button>{' '}
-                                        <Button onClick={() => handleDeleteProduct(product.id)} variant="danger">Delete</Button>{' '}
-                                    </td>
-                                </tr>
-                            )
-                        })}
-                    </tbody>
-                </Table>
-                <ReactPaginate
-                    breakLabel="..."
-                    nextLabel="next >"
-                    onPageChange={handlePageClick}
-                    pageRangeDisplayed={5}
-                    pageCount={totalPage}
-                    previousLabel="< previous"
-                    pageClassName="page-item"
-                    pageLinkClassName="page-link"
-                    previousClassName="page-item"
-                    previousLinkClassName="page-link"
-                    nextClassName='page-item'
-                    nextLinkClassName="page-link"
-                    breakClassName='page-item'
-                    breakLinkClassName='page-link'
-                    containerClassName='pagination'
-                    activeClassName='active'
-                />
-                <ModalAddProduct show={isShow} handleClose={handleClose} handleUpdateTable={handleUpdateTable} />
-                <ModalEditProduct show={isShowEdit} handleClose={handleClose} dataProductEdit={dataProductEdit} handleEditProductFromModal={handleEditProductFromModal} />
-            </div>
-        </>
-    )
-}
+  return (
+    <>
+      <Nav />
+      <div className="container">
+        <div className="my-3 d-flex justify-content-between">
+          <span className="fs-3 text-white">List Product:</span>
+          <Button variant="success" onClick={() => setShow(true)}>Add new product</Button>
+        </div>
+        <div className="search-product-bar my-2">
+          <input
+            type="text"
+            placeholder="Search.."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="px-1 py-1 input_product_search"
+          />
+          <i className="bi bi-search btn btn-success"></i>
+        </div>
+        <div id="collapse1" className="">
+          <Table className="bg-white table-responsive">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Image</th>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Create At</th>
+                <th>Option</th>
+              </tr>
+            </thead>
+            <tbody className="fs-6">
+              {filteredProducts.map((product, index) => (
+                <tr key={product.id}>
+                  <td>{index + 1}</td>
+                  <td>{product.nameProduct}</td>
+                  <td>
+                    <img style={{ width: 80 }} src={product.img} alt={product.nameProduct} />
+                  </td>
+                  <td>{truncateDescription(product.description, MAX_DESCRIPTION_LENGTH)}</td>
+                  <td>{product.quantity}</td>
+                  <td>{product.price}</td>
+                  <td><FormattedDate createdAt={product.createdAt} /></td>
+                  <td>
+                    <Button variant="warning" onClick={() => handleShowGetByIdProduct(product.id)}>Edit</Button>{" "}
+                    <Button variant="danger" onClick={() => handleDeleteProduct(product.id)}>Delete</Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </div>
+        <ReactPaginate
+          breakLabel="..."
+          nextLabel="next >"
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={5}
+          pageCount={totalPage}
+          previousLabel="< previous"
+          pageClassName="page-item"
+          pageLinkClassName="page-link"
+          previousClassName="page-item"
+          previousLinkClassName="page-link"
+          nextClassName="page-item"
+          nextLinkClassName="page-link"
+          breakClassName="page-item"
+          breakLinkClassName="page-link"
+          containerClassName="pagination"
+          activeClassName="active"
+        />
+        <ModalAddProduct
+          show={isShow}
+          handleClose={() => setShow(false)}
+          handleUpdateTable={() => getProducts(1)}
+        />
+        <ModalEditProduct
+          show={isShowEdit}
+          handleClose={() => setShowedit(false)}
+          dataProductEdit={dataProductEdit}
+          handleEditProductFromModal={() => getProducts(1)}
+        />
+      </div>
+    </>
+  );
+};
 
 export default TableProduct;

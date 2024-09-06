@@ -18,4 +18,7 @@ const putUpdateUser = (id, email, first_name, last_name, avatar, password) => {
 const logins = (email, password) => {
     return axios.post('/api/user/login', { email, password });
 }
-export { fetchAllUser, postCreateUser, deleteUser, getbyideUser, putUpdateUser, logins };
+const registerUser = (email, first_name, last_name, password) => {
+    return axios.post('/api/user/register', { email, first_name, last_name, password });
+}
+export { fetchAllUser, postCreateUser, deleteUser, getbyideUser, putUpdateUser, logins,registerUser  };

@@ -4,9 +4,11 @@ import { ToastContainer } from "react-toastify";
 import useScript from "./hook/useScript";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-
 import TableUser from "./components/UserComponents/TableUser";
 import TableProduct from "./components/Product/TableProduct";
+import Order from "./components/OrderComponents/Order";
+import Register from "./components/Home/Register";
+
 import Home from "./components/AdminComponents/Home";
 import LoginForm from "./components/Home/Login";
 import Product from "./components/Product/Product";
@@ -15,6 +17,7 @@ import MainLayout from "./components/AdminComponents/MainLayout";
 import AdminLayout from "./components/AdminComponents/AdminLayout";
 import Sidebar from "./components/AdminComponents/Sidebar";
 import Cart from "./components/CartComponents/Cart";
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
@@ -24,7 +27,7 @@ function App() {
     setIsLoggedIn(true);
     setUserInfo(user);
     sessionStorage.setItem("user", JSON.stringify(user));
-    if (user.first_name === 'long') {
+    if (user.first_name === 'Long') {
       navigate('/admin/home');
     } else {
       navigate('/');
@@ -40,56 +43,68 @@ function App() {
 
   useEffect(() => {
     const session = sessionStorage.getItem('user');
+    const currentPath = window.location.pathname;
+  
     if (session) {
       const user = JSON.parse(session);
       setIsLoggedIn(true);
       setUserInfo(user);
-    } else {
+    } else if (currentPath !== '/logins' && currentPath !== '/register') {
       navigate('/logins');
     }
   }, [navigate]);
 
   const AdminRoute = ({ children }) => {
-    if (!isLoggedIn || userInfo?.first_name !== 'long') {
+    if (userInfo?.first_name !== 'Long') {
       return <LoginForm handleLogin={handleLogin} />;
     }
     return children;
   };
+  
 
   useScript();
 
   return (
     <>
+
       <Routes>
+        {/* Trang chủ không yêu cầu đăng nhập */}
         <Route
           path="/"
           element={
-            <MainLayout
-
-            >
+            <MainLayout>
               <Product />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <MainLayout>
+              <Register />
             </MainLayout>
           }
         />
         <Route
           path="/Cart"
           element={
-            <MainLayout
-
-            >
+            <MainLayout>
               <Cart />
             </MainLayout>
           }
         />
-
-        
+        <Route
+          path="/Order"
+          element={
+            <MainLayout>
+              <Order />
+            </MainLayout>
+          }
+        />
         <Route
           path="/productdetail/:idproduct"
           element={
             <MainLayout
-              isLoggedIn={isLoggedIn}
-              userInfo={userInfo}
-              handleLogout={handleLogout}
             >
               <Productdetail />
             </MainLayout>
@@ -121,7 +136,7 @@ function App() {
                       <Routes>
                         <Route path="home" element={<Home />} />
                         <Route path="users" element={<TableUser />} />
-                        <Route path="products" element={<TableProduct />}/>
+                        <Route path="products" element={<TableProduct />} />
                         {/* Add other admin routes here */}
                       </Routes>
                     </div>
@@ -132,6 +147,7 @@ function App() {
           }
         />
       </Routes>
+
       <ToastContainer
         position="top-right"
         autoClose={5000}

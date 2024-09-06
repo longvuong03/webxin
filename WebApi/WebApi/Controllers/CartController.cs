@@ -18,28 +18,41 @@ namespace WebApi.Controllers
             this.cartDetailsService = cartDetailsService;
             this.productService = productService;
         }
-
         [HttpGet("listcarrt")]
         public async Task<IActionResult> Listcarrt(int UserId)
         {
             Cart cart = await cartService.GetCartByUserIdAsync(UserId);
-            List<CartDetail> cartDetails = await cartDetailsService.GetListCartDetailsAsync(cart.Id);
+
+            List<CartDetail> cartDetails = new List<CartDetail>();
+
+            // Nếu cart không null thì lấy danh sách chi tiết giỏ hàng
+            if (cart != null)
+            {
+                cartDetails = await cartDetailsService.GetListCartDetailsAsync(cart.Id);
+            }
+
             List<Modeldata> modeldatas = new List<Modeldata>();
+
             foreach (var item in cartDetails)
             {
                 Products products = await productService.GetProductByIdAsync(item.ProductId);
                 products.CartDetails = null;
+
                 Modeldata modeldata = new Modeldata()
                 {
                     CartDetail = item,
                     Products = products,
                 };
+
                 item.Product = null;
                 item.Cart = null;
                 modeldatas.Add(modeldata);
             }
+
+            // Trả về danh sách modeldatas, nếu cart là null thì trả về danh sách rỗng
             return Ok(modeldatas);
         }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCart(int id)
         {

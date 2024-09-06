@@ -1,50 +1,56 @@
 import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { putUpdateProduct } from '../../services/ProductService'; // Import the product service
+import { updateProduct } from '../../services/ProductService'; // Import the product service
 import { toast } from 'react-toastify';
 
 const ModalEditProduct = (props) => {
     const { show, handleClose, dataProductEdit, handleEditProductFromModal } = props;
-    const [img, setImg] = useState('');
     const [nameProduct, setNameProduct] = useState('');
     const [quantity, setQuantity] = useState('');
     const [price, setPrice] = useState('');
+    const [imgFile, setImgFile] = useState(null); // Đổi từ chuỗi thành null
+    const [description, setDescription] = useState('');
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+    
+        const formData = new FormData();
+        formData.append('id', dataProductEdit.id);
+        formData.append('nameProduct', nameProduct);
+        formData.append('description', description);
+        formData.append('price', price);
+        formData.append('quantity', quantity);
+        
+        // Chỉ thêm imgFile nếu có tập tin mới
+        if (imgFile) {
+            formData.append('imgFile', imgFile);
+        }
 
-    const handleUpdateProduct = async () => {
         try {
-            console.log("Updating product:", dataProductEdit.id, img, nameProduct,quantity, price);
-            let res = await putUpdateProduct(dataProductEdit.id, img, nameProduct,quantity, price);
-            console.log("Update product response:", res);
-            if (res) {
-                console.log("Product update successful. Data:", res);
-                handleEditProductFromModal({
-                    id: dataProductEdit.id,
-                    img: img,
-                    nameProduct: nameProduct,
-                    quantity : quantity,
-                    price: price
-                });
-                handleClose();
-                toast.success("Product updated successfully");
-            }
+            await updateProduct(formData);
+            handleEditProductFromModal(); // Cập nhật bảng từ component cha
+            handleClose(); // Đóng modal
         } catch (error) {
-            console.error("Error updating product:", error);
-            toast.error("Failed to update product");
+            console.error('Failed to update product:', error);
         }
     };
 
     useEffect(() => {
         if (show && dataProductEdit) {
-
-            setImg(dataProductEdit.img);
             setNameProduct(dataProductEdit.nameProduct);
-            setPrice(dataProductEdit.quantity);
+            setQuantity(dataProductEdit.quantity);
             setPrice(dataProductEdit.price);
-
+            setDescription(dataProductEdit.description);
+            // Không cần thiết lập imgFile nếu không cập nhật ảnh
+            // Set imgFile to null when the modal is opened
+            setImgFile(null);
         }
     }, [show, dataProductEdit]);
+
+    const handleFileChange = (event) => {
+        setImgFile(event.target.files[0]);
+    };
 
     return (
         <>
@@ -55,16 +61,12 @@ const ModalEditProduct = (props) => {
                 <Modal.Body>
                     <div className="body-add-new">
                         <form>
-                           
-                            
                             <div className="form-group">
-                                <label className="form-label">Image URL</label>
+                                <label className="form-label">Image</label>
                                 <input 
-                                    type="text" 
+                                    type="file" 
                                     className="form-control" 
-                                    placeholder="Image URL"
-                                    value={img}
-                                    onChange={(e) => setImg(e.target.value)} 
+                                    onChange={handleFileChange} 
                                 />
                             </div>
                             <div className="form-group">
@@ -78,11 +80,21 @@ const ModalEditProduct = (props) => {
                                 />
                             </div>
                             <div className="form-group">
-                                <label className="form-label">quantity</label>
+                                <label className="form-label">Description</label>
                                 <input 
                                     type="text" 
                                     className="form-control" 
-                                    placeholder="quantity"
+                                    placeholder="Product description"
+                                    value={description}
+                                    onChange={(e) => setDescription(e.target.value)} 
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label className="form-label">Quantity</label>
+                                <input 
+                                    type="text" 
+                                    className="form-control" 
+                                    placeholder="Quantity"
                                     value={quantity}
                                     onChange={(e) => setQuantity(e.target.value)} 
                                 />
@@ -104,7 +116,7 @@ const ModalEditProduct = (props) => {
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={handleUpdateProduct}>
+                    <Button variant="primary" onClick={handleSubmit}>
                         Update
                     </Button>
                 </Modal.Footer>

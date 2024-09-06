@@ -1,6 +1,7 @@
 ﻿using WebApi.Data;
 using WebApi.Models;
 using Microsoft.EntityFrameworkCore;
+using WebApi.Models.DTO;
 
 namespace WebApi.Services
 {
@@ -16,8 +17,20 @@ namespace WebApi.Services
         public async Task<List<Products>> GetProductsAsync()
         {
             return await _context.Product
-                .OrderByDescending(p => p.id).ToListAsync();
+                .OrderByDescending(p => p.id)
+                .Select(p => new Products
+                {
+                    id = p.id,
+                    nameProduct = p.nameProduct,
+                    description = p.description,
+                    quantity = p.quantity,
+                    price = p.price,
+                    img = p.img,
+                    createdAt = p.createdAt
+                })
+                .ToListAsync();
         }
+
 
         public async Task AddProductAsync(Products product)
         {
@@ -43,18 +56,48 @@ namespace WebApi.Services
 
         public async Task UpdateProductAsync(Products product)
         {
+            // Tìm sản phẩm cần cập nhật trong cơ sở dữ liệu
             var existingProduct = await _context.Product.FindAsync(product.id);
-            if (existingProduct != null)
+            if (existingProduct == null)
             {
-                existingProduct.img = product.img;
-                existingProduct.nameProduct = product.nameProduct;
-                existingProduct.price = product.price;
-
-                _context.Product.Update(existingProduct);
-                await _context.SaveChangesAsync();
+                throw new Exception("Product not found.");
             }
-        }
 
+            // Cập nhật các thuộc tính của sản phẩm
+            existingProduct.nameProduct = product.nameProduct;
+            existingProduct.description = product.description;
+            existingProduct.price = product.price;
+            existingProduct.quantity = product.quantity;
+            existingProduct.img = product.img;
+
+            // Lưu thay đổi vào cơ sở dữ liệu
+            _context.Product.Update(existingProduct);
+            await _context.SaveChangesAsync();
+        }
+        public async Task<ProductDTO> GetProductDTOByIdAsync(int id)
+        {
+            Products product = await _context.Product.FindAsync(id);
+
+            // Check if the product exists
+            if (product == null)
+            {
+                return null;
+            }
+
+            // Map the product entity to ProductDto
+            var productDto = new ProductDTO
+            {
+                id = product.id,
+                nameProduct = product.nameProduct,
+                description = product.description,
+                quantity = product.quantity,
+                price = product.price,
+                img = product.img,
+                createdAt = product.createdAt
+            };
+
+            return productDto;
+        }
         public async Task DeleteProductAsync(int id)
         {
             var product = await _context.Product.FindAsync(id);

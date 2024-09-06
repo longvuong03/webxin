@@ -8,6 +8,8 @@ builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<CartDetailsService>();
 builder.Services.AddScoped<CartService>();
 builder.Services.AddScoped<ProductService>();
+builder.Services.AddScoped<OrderDetailsService>();
+builder.Services.AddScoped<OrderService>();
 
 
 // Add services to the container.

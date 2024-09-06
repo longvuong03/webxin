@@ -2,13 +2,16 @@ import React, { useState } from 'react';
 import { logins } from '../../services/UserServices';
 import '../../asset/css/styledn.css';
 // import './assets/css/style.css';
+import { useNavigate } from "react-router-dom";
 
+import Header from '../Common/Header';
 
 
 
 const LoginForm = ({ handleLogin }) => {
     const [email, setEmail] = useState(''); 
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
     const handleLoginSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -34,16 +37,13 @@ const LoginForm = ({ handleLogin }) => {
         setEmail('');
         setPassword('');
     }
+    const handleClickRegis = () => {
+      navigate(`/register`);
+    };
     return (
-        <div>
-        <div className="container">
-           <div className="row mb-5">
-              <div className="col-9 col-sm-8 mt-4 mb-4">
-                 <p className="fw-bolder fs-6">LOGIN</p>
-              </div>
-              <div className="col-2 col-sm-4 fs-6 fw-bolder text-secondary mt-4 mb-4 font-respon">HOME / LOGIN</div>
-           </div>
-        </div>
+       <div>
+           <Header/>
+
         <div className="container">
            <div className="row mt-4">
               <div className="col-lg-5 col-sm-12 mt-5">
@@ -104,12 +104,12 @@ const LoginForm = ({ handleLogin }) => {
                     <p className="fs-3 fw-bold">NEW CUSTOMER</p>
                  </div>
                  <div className="row mt-3">
-                    <p className="fw-bold">CREATE AN ACCOUNT</p>
+                    <p className="fw-bold" >CREATE AN ACCOUNT</p>
                     <p className="text-secondary mt-3">
                        Sign up for a free account at our store. Registration is quick and easy. It allows you to be able to order from our shop. To start shopping click register.
                     </p>
                     <button className="btnsignup">
-                    <a href="./indexdk.html" className="text-decoration-none text-white fw-bold">CREATE AN ACCOUNT</a>
+                    <a onClick={handleClickRegis} className="text-decoration-none text-white fw-bold">CREATE AN ACCOUNT</a>
                     </button>
                  </div>
               </div>

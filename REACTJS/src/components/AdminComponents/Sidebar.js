@@ -33,6 +33,10 @@ const Sidebar = ({ isLoggedIn, userInfo, handleLogout }) => {
                 <span className='fs-5'><Nav.Link class="nav-link active  responsive_none" as={NavLink} to="/admin/users" aria-current="page">User</Nav.Link></span>
             </a>
             <a className='list-group-item py-2 d-flex'>
+            <i class="bi bi-card-checklist fs-5 me-3"></i>
+                <span className='fs-5'><Nav.Link class="nav-link active  responsive_none" as={NavLink} to="/admin/orders" aria-current="page">Orders</Nav.Link></span>
+            </a>
+            <a className='list-group-item py-2 d-flex'>
                 <i className='bi bi-lock fs-5 me-3'></i>
                 <span className='fs-5'>{isLoggedIn ? (
                             <NavDropdown title={userInfo?.first_name || 'User'}>

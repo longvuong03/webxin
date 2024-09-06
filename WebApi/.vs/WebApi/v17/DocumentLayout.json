@@ -7,40 +7,12 @@
       "RelativeMoniker": "D:0:0:{CEA78FFD-B537-4F92-8216-A9FAA927C20B}|WebApi\\WebApi.csproj|solutionrelative:webapi\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CEA78FFD-B537-4F92-8216-A9FAA927C20B}|WebApi\\WebApi.csproj|c:\\users\\longk\\downloads\\app-master\\webapi\\webapi\\models\\cart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CEA78FFD-B537-4F92-8216-A9FAA927C20B}|WebApi\\WebApi.csproj|solutionrelative:webapi\\models\\cart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CEA78FFD-B537-4F92-8216-A9FAA927C20B}|WebApi\\WebApi.csproj|c:\\users\\longk\\downloads\\app-master\\webapi\\webapi\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CEA78FFD-B537-4F92-8216-A9FAA927C20B}|WebApi\\WebApi.csproj|solutionrelative:webapi\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CEA78FFD-B537-4F92-8216-A9FAA927C20B}|WebApi\\WebApi.csproj|c:\\users\\longk\\downloads\\app-master\\webapi\\webapi\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CEA78FFD-B537-4F92-8216-A9FAA927C20B}|WebApi\\WebApi.csproj|solutionrelative:webapi\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CEA78FFD-B537-4F92-8216-A9FAA927C20B}|WebApi\\WebApi.csproj|c:\\users\\longk\\downloads\\app-master\\webapi\\webapi\\migrations\\20240824145709_initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CEA78FFD-B537-4F92-8216-A9FAA927C20B}|WebApi\\WebApi.csproj|solutionrelative:webapi\\migrations\\20240824145709_initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CEA78FFD-B537-4F92-8216-A9FAA927C20B}|WebApi\\WebApi.csproj|c:\\users\\longk\\downloads\\app-master\\webapi\\webapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{CEA78FFD-B537-4F92-8216-A9FAA927C20B}|WebApi\\WebApi.csproj|solutionrelative:webapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CEA78FFD-B537-4F92-8216-A9FAA927C20B}|WebApi\\WebApi.csproj|c:\\users\\longk\\downloads\\app-master\\webapi\\webapi\\models\\products.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CEA78FFD-B537-4F92-8216-A9FAA927C20B}|WebApi\\WebApi.csproj|solutionrelative:webapi\\models\\products.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CEA78FFD-B537-4F92-8216-A9FAA927C20B}|WebApi\\WebApi.csproj|c:\\users\\longk\\downloads\\app-master\\webapi\\webapi\\models\\cartdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CEA78FFD-B537-4F92-8216-A9FAA927C20B}|WebApi\\WebApi.csproj|solutionrelative:webapi\\models\\cartdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CEA78FFD-B537-4F92-8216-A9FAA927C20B}|WebApi\\WebApi.csproj|c:\\users\\longk\\downloads\\app-master\\webapi\\webapi\\services\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CEA78FFD-B537-4F92-8216-A9FAA927C20B}|WebApi\\WebApi.csproj|solutionrelative:webapi\\services\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CEA78FFD-B537-4F92-8216-A9FAA927C20B}|WebApi\\WebApi.csproj|c:\\users\\longk\\downloads\\app-master\\webapi\\webapi\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{CEA78FFD-B537-4F92-8216-A9FAA927C20B}|WebApi\\WebApi.csproj|solutionrelative:webapi\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CEA78FFD-B537-4F92-8216-A9FAA927C20B}|WebApi\\WebApi.csproj|c:\\users\\longk\\downloads\\app-master\\webapi\\webapi\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CEA78FFD-B537-4F92-8216-A9FAA927C20B}|WebApi\\WebApi.csproj|solutionrelative:webapi\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CEA78FFD-B537-4F92-8216-A9FAA927C20B}|WebApi\\WebApi.csproj|c:\\users\\longk\\downloads\\app-master\\webapi\\webapi\\models\\dto\\orderdetaildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CEA78FFD-B537-4F92-8216-A9FAA927C20B}|WebApi\\WebApi.csproj|solutionrelative:webapi\\models\\dto\\orderdetaildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CEA78FFD-B537-4F92-8216-A9FAA927C20B}|WebApi\\WebApi.csproj|c:\\users\\longk\\downloads\\app-master\\webapi\\webapi\\models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -51,12 +23,28 @@
       "RelativeMoniker": "D:0:0:{CEA78FFD-B537-4F92-8216-A9FAA927C20B}|WebApi\\WebApi.csproj|solutionrelative:webapi\\models\\orderdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CEA78FFD-B537-4F92-8216-A9FAA927C20B}|WebApi\\WebApi.csproj|c:\\users\\longk\\downloads\\app-master\\webapi\\webapi\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CEA78FFD-B537-4F92-8216-A9FAA927C20B}|WebApi\\WebApi.csproj|solutionrelative:webapi\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CEA78FFD-B537-4F92-8216-A9FAA927C20B}|WebApi\\WebApi.csproj|c:\\users\\longk\\downloads\\app-master\\webapi\\webapi\\models\\dto\\orderdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CEA78FFD-B537-4F92-8216-A9FAA927C20B}|WebApi\\WebApi.csproj|solutionrelative:webapi\\models\\dto\\orderdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CEA78FFD-B537-4F92-8216-A9FAA927C20B}|WebApi\\WebApi.csproj|c:\\users\\longk\\downloads\\app-master\\webapi\\webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CEA78FFD-B537-4F92-8216-A9FAA927C20B}|WebApi\\WebApi.csproj|solutionrelative:webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CEA78FFD-B537-4F92-8216-A9FAA927C20B}|WebApi\\WebApi.csproj|c:\\users\\longk\\downloads\\app-master\\webapi\\webapi\\models\\modeldata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CEA78FFD-B537-4F92-8216-A9FAA927C20B}|WebApi\\WebApi.csproj|solutionrelative:webapi\\models\\modeldata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CEA78FFD-B537-4F92-8216-A9FAA927C20B}|WebApi\\WebApi.csproj|c:\\users\\longk\\downloads\\app-master\\webapi\\webapi\\services\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CEA78FFD-B537-4F92-8216-A9FAA927C20B}|WebApi\\WebApi.csproj|solutionrelative:webapi\\services\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CEA78FFD-B537-4F92-8216-A9FAA927C20B}|WebApi\\WebApi.csproj|c:\\users\\longk\\downloads\\app-master\\webapi\\webapi\\services\\cartservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CEA78FFD-B537-4F92-8216-A9FAA927C20B}|WebApi\\WebApi.csproj|solutionrelative:webapi\\services\\cartservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CEA78FFD-B537-4F92-8216-A9FAA927C20B}|WebApi\\WebApi.csproj|c:\\users\\longk\\downloads\\app-master\\webapi\\webapi\\models\\dto\\productdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CEA78FFD-B537-4F92-8216-A9FAA927C20B}|WebApi\\WebApi.csproj|solutionrelative:webapi\\models\\dto\\productdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CEA78FFD-B537-4F92-8216-A9FAA927C20B}|WebApi\\WebApi.csproj|c:\\users\\longk\\downloads\\app-master\\webapi\\webapi\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CEA78FFD-B537-4F92-8216-A9FAA927C20B}|WebApi\\WebApi.csproj|solutionrelative:webapi\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -66,56 +54,85 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Cart.cs",
-              "DocumentMoniker": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\Models\\Cart.cs",
-              "RelativeDocumentMoniker": "WebApi\\Models\\Cart.cs",
-              "ToolTip": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\Models\\Cart.cs",
-              "RelativeToolTip": "WebApi\\Models\\Cart.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAoAAAA",
+              "DocumentIndex": 4,
+              "Title": "OrderDetail.cs",
+              "DocumentMoniker": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\Models\\OrderDetail.cs",
+              "RelativeDocumentMoniker": "WebApi\\Models\\OrderDetail.cs",
+              "ToolTip": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\Models\\OrderDetail.cs",
+              "RelativeToolTip": "WebApi\\Models\\OrderDetail.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-24T13:55:23.774Z",
+              "WhenOpened": "2024-09-06T17:53:33.3Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "OrderDTO.cs",
+              "DocumentMoniker": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\Models\\DTO\\OrderDTO.cs",
+              "RelativeDocumentMoniker": "WebApi\\Models\\DTO\\OrderDTO.cs",
+              "ToolTip": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\Models\\DTO\\OrderDTO.cs",
+              "RelativeToolTip": "WebApi\\Models\\DTO\\OrderDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-06T17:27:51.233Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "20240824145709_initial.cs",
-              "DocumentMoniker": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\Migrations\\20240824145709_initial.cs",
-              "RelativeDocumentMoniker": "WebApi\\Migrations\\20240824145709_initial.cs",
-              "ToolTip": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\Migrations\\20240824145709_initial.cs",
-              "RelativeToolTip": "WebApi\\Migrations\\20240824145709_initial.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Title": "Order.cs",
+              "DocumentMoniker": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\Models\\Order.cs",
+              "RelativeDocumentMoniker": "WebApi\\Models\\Order.cs",
+              "ToolTip": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\Models\\Order.cs",
+              "RelativeToolTip": "WebApi\\Models\\Order.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAABAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-24T14:57:09.801Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ProductService.cs",
-              "DocumentMoniker": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\Services\\ProductService.cs",
-              "RelativeDocumentMoniker": "WebApi\\Services\\ProductService.cs",
-              "ToolTip": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\Services\\ProductService.cs",
-              "RelativeToolTip": "WebApi\\Services\\ProductService.cs",
-              "ViewState": "AQIAACgAAAAAAAAAAAAcwAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-24T14:39:44.4Z"
+              "WhenOpened": "2024-09-06T17:32:40.987Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "ProductController.cs",
-              "DocumentMoniker": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\Controllers\\ProductController.cs",
-              "RelativeDocumentMoniker": "WebApi\\Controllers\\ProductController.cs",
-              "ToolTip": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\Controllers\\ProductController.cs",
-              "RelativeToolTip": "WebApi\\Controllers\\ProductController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACwAAABHAAAA",
+              "Title": "OrderDetailDTO.cs",
+              "DocumentMoniker": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\Models\\DTO\\OrderDetailDTO.cs",
+              "RelativeDocumentMoniker": "WebApi\\Models\\DTO\\OrderDetailDTO.cs",
+              "ToolTip": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\Models\\DTO\\OrderDetailDTO.cs",
+              "RelativeToolTip": "WebApi\\Models\\DTO\\OrderDetailDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAoAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-24T14:31:53.606Z"
+              "WhenOpened": "2024-09-06T17:30:05.321Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "CartService.cs",
+              "DocumentMoniker": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\Services\\CartService.cs",
+              "RelativeDocumentMoniker": "WebApi\\Services\\CartService.cs",
+              "ToolTip": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\Services\\CartService.cs",
+              "RelativeToolTip": "WebApi\\Services\\CartService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-06T17:24:42.012Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Modeldata.cs",
+              "DocumentMoniker": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\Models\\Modeldata.cs",
+              "RelativeDocumentMoniker": "WebApi\\Models\\Modeldata.cs",
+              "ToolTip": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\Models\\Modeldata.cs",
+              "RelativeToolTip": "WebApi\\Models\\Modeldata.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-06T17:19:00.565Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -125,118 +142,62 @@
               "RelativeDocumentMoniker": "WebApi\\Controllers\\CartController.cs",
               "ToolTip": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\Controllers\\CartController.cs",
               "RelativeToolTip": "WebApi\\Controllers\\CartController.cs",
-              "ViewState": "AQIAAAcAAAAAAAAAAAAcwB4AAAAsAAAA",
+              "ViewState": "AQIAAHEAAAAAAAAAAAAiwIMAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-24T14:31:51.746Z",
+              "WhenOpened": "2024-09-05T16:45:43.073Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "appsettings.Development.json",
-              "DocumentMoniker": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\appsettings.Development.json",
-              "RelativeDocumentMoniker": "WebApi\\appsettings.Development.json",
-              "ToolTip": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\appsettings.Development.json",
-              "RelativeToolTip": "WebApi\\appsettings.Development.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-08-24T14:23:40.783Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "CartDetail.cs",
-              "DocumentMoniker": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\Models\\CartDetail.cs",
-              "RelativeDocumentMoniker": "WebApi\\Models\\CartDetail.cs",
-              "ToolTip": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\Models\\CartDetail.cs",
-              "RelativeToolTip": "WebApi\\Models\\CartDetail.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAkAAAARAAAA",
+              "DocumentIndex": 1,
+              "Title": "OrderController.cs",
+              "DocumentMoniker": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\Controllers\\OrderController.cs",
+              "RelativeDocumentMoniker": "WebApi\\Controllers\\OrderController.cs",
+              "ToolTip": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\Controllers\\OrderController.cs",
+              "RelativeToolTip": "WebApi\\Controllers\\OrderController.cs",
+              "ViewState": "AQIAACsAAAAAAAAAAAAqwD4AAAAoAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-24T14:19:22.808Z"
+              "WhenOpened": "2024-09-06T17:08:15.582Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 9,
-              "Title": "ApplicationDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\Data\\ApplicationDbContext.cs",
-              "RelativeDocumentMoniker": "WebApi\\Data\\ApplicationDbContext.cs",
-              "ToolTip": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\Data\\ApplicationDbContext.cs",
-              "RelativeToolTip": "WebApi\\Data\\ApplicationDbContext.cs",
-              "ViewState": "AQIAACIAAAAAAAAAAAAkwDQAAAAAAAAA",
+              "Title": "ProductDTO.cs",
+              "DocumentMoniker": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\Models\\DTO\\ProductDTO.cs",
+              "RelativeDocumentMoniker": "WebApi\\Models\\DTO\\ProductDTO.cs",
+              "ToolTip": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\Models\\DTO\\ProductDTO.cs",
+              "RelativeToolTip": "WebApi\\Models\\DTO\\ProductDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAATAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-24T14:15:55.172Z"
+              "WhenOpened": "2024-09-05T18:52:35.814Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "User.cs",
-              "DocumentMoniker": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\Models\\User.cs",
-              "RelativeDocumentMoniker": "WebApi\\Models\\User.cs",
-              "ToolTip": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\Models\\User.cs",
-              "RelativeToolTip": "WebApi\\Models\\User.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAAAAAA",
+              "DocumentIndex": 7,
+              "Title": "ProductService.cs",
+              "DocumentMoniker": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\Services\\ProductService.cs",
+              "RelativeDocumentMoniker": "WebApi\\Services\\ProductService.cs",
+              "ToolTip": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\Services\\ProductService.cs",
+              "RelativeToolTip": "WebApi\\Services\\ProductService.cs",
+              "ViewState": "AQIAAD4AAAAAAAAAAAAUwGAAAAAOAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-24T14:14:32.302Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\appsettings.json",
-              "RelativeDocumentMoniker": "WebApi\\appsettings.json",
-              "ToolTip": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\appsettings.json",
-              "RelativeToolTip": "WebApi\\appsettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-08-24T14:02:36.245Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\Program.cs",
-              "RelativeDocumentMoniker": "WebApi\\Program.cs",
-              "ToolTip": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\Program.cs",
-              "RelativeToolTip": "WebApi\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-24T14:02:34.125Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Products.cs",
-              "DocumentMoniker": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\Models\\Products.cs",
-              "RelativeDocumentMoniker": "WebApi\\Models\\Products.cs",
-              "ToolTip": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\Models\\Products.cs",
-              "RelativeToolTip": "WebApi\\Models\\Products.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAqAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-24T13:56:17.49Z"
+              "WhenOpened": "2024-09-05T17:40:53.148Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 10,
-              "Title": "Order.cs",
-              "DocumentMoniker": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\Models\\Order.cs",
-              "RelativeDocumentMoniker": "WebApi\\Models\\Order.cs",
-              "ToolTip": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\Models\\Order.cs",
-              "RelativeToolTip": "WebApi\\Models\\Order.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAQAAAATAAAA",
+              "Title": "ProductController.cs",
+              "DocumentMoniker": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\Controllers\\ProductController.cs",
+              "RelativeDocumentMoniker": "WebApi\\Controllers\\ProductController.cs",
+              "ToolTip": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\Controllers\\ProductController.cs",
+              "RelativeToolTip": "WebApi\\Controllers\\ProductController.cs",
+              "ViewState": "AQIAALEAAAAAAAAAAAAiwMQAAABFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-24T13:55:28.381Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "OrderDetail.cs",
-              "DocumentMoniker": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\Models\\OrderDetail.cs",
-              "RelativeDocumentMoniker": "WebApi\\Models\\OrderDetail.cs",
-              "ToolTip": "C:\\Users\\longk\\Downloads\\app-master\\WebApi\\WebApi\\Models\\OrderDetail.cs",
-              "RelativeToolTip": "WebApi\\Models\\OrderDetail.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAWAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-24T13:55:56.757Z"
+              "WhenOpened": "2024-09-05T17:29:27.447Z",
+              "EditorCaption": ""
             }
           ]
         }

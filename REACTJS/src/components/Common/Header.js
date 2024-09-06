@@ -18,7 +18,7 @@ const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
   const [show, setShow] = useState(false);
-  
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const handleLogout = () => {
@@ -27,7 +27,9 @@ const Header = () => {
     setUserInfo(null);
     navigate("/logins");
   };
-
+  const handleOrdersClick = () => {
+    navigate(`/order`);
+  };
   const navigate = useNavigate();
   return (
     <header>
@@ -75,6 +77,9 @@ const Header = () => {
                       </a>
           <span className="d-flex mt-1 mx-3"><i class="fa-solid fa-user mt-1 mx-2"></i>{isLoggedIns ? (
             <NavDropdown title={userName || "User"}>
+                <NavDropdown.Item onClick={handleOrdersClick}>
+                  Orders
+                </NavDropdown.Item>
                 <NavDropdown.Item onClick={handleLogout}>
                   Logout
                 </NavDropdown.Item>

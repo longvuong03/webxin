@@ -1,38 +1,41 @@
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { postCreateProduct } from '../../services/ProductService'; // Import the product service
+import { postCreateProduct ,addProducts} from '../../services/ProductService'; // Import the product service
 import { toast } from 'react-toastify';
 
 const ModalAddProduct = (props) => {
     const { show, handleClose, handleUpdateTable } = props;
-    const [img, setImg] = useState('');
+    const [imgFile, setImgFile] = useState('');
     const [nameProduct, setNameProduct] = useState('');
+    const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
     const [quantity, setQuantity] = useState('');
-    const handleSave = async () => {
-        console.log(img, nameProduct,quantity, price);
-        let res = await postCreateProduct(img, nameProduct,quantity, price); // Call the product service
-        console.log(res);
-        if (res && res.id) {
-            handleClose();
-            setImg('');
-            setNameProduct('');
-            setQuantity('');
-            setPrice('');
-            toast.success("Create product successfully");
-            handleUpdateTable({
-                id: res.id,
-                img: res.img,
-                nameProduct: res.nameProduct,
-                quantity :res.quantity,
-                price: res.price
-            });
-        } else {
-            toast.error("Create product failed");
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        
+        // Tạo FormData để gửi dữ liệu
+        const formData = new FormData();
+        formData.append('nameProduct', nameProduct);
+        formData.append('description', description);
+        formData.append('price', price);
+        formData.append('quantity', quantity);
+        formData.append('imgFile', imgFile);  // File ảnh đại diện
+    
+        try {
+          const response = await addProducts(formData);
+          alert('Product added successfully');
+          console.log('Response from server:', response);
+          handleClose();
+          handleUpdateTable(); // Cập nhật bảng từ component cha
+        } catch (error) {
+          console.error('Failed to add product:', error);
         }
-    }
+      };
+      const handleFileChange = (event) => {
+        setImgFile(event.target.files[0]);
 
+    };
     return (
         <>
             <Modal show={show} onHide={handleClose}>
@@ -45,13 +48,13 @@ const ModalAddProduct = (props) => {
                            
                             <div className="form-group">
                                 <label className="form-label">Image URL</label>
-                                <input 
-                                    type="text" 
-                                    className="form-control" 
-                                    placeholder="Image URL"
-                                    value={img}
-                                    onChange={(e) => setImg(e.target.value)} 
-                                />
+                                <input
+                                        type="file"
+                                        id="imgFile"
+                                        className="form-control"
+                                        onChange={handleFileChange}
+                                        required
+                                    />
                             </div>
                             <div className="form-group">
                                 <label className="form-label">Quantity</label>
@@ -74,6 +77,16 @@ const ModalAddProduct = (props) => {
                                 />
                             </div>
                             <div className="form-group">
+                                <label className="form-label">Description</label>
+                                <input 
+                                    type="text" 
+                                    className="form-control" 
+                                    placeholder="Product Description"
+                                    value={description}
+                                    onChange={(e) => setDescription(e.target.value)} 
+                                />
+                            </div>
+                            <div className="form-group">
                                 <label className="form-label">Price</label>
                                 <input 
                                     type="number" 
@@ -90,7 +103,7 @@ const ModalAddProduct = (props) => {
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={handleSave}>
+                    <Button variant="primary" onClick={handleSubmit}>
                         Save
                     </Button>
                 </Modal.Footer>

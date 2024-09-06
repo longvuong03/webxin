@@ -1,174 +1,149 @@
-import React, { useState, useEffect } from 'react';
-import Button from 'react-bootstrap/Button';
-import { fetchAllProduct,getbyidProduct } from '../../services/ProductService';
-import { useParams } from 'react-router-dom';
-import '../../asset/css/stylesp.css';
-
+import React, { useState, useEffect } from "react";
+import DropDown from "react-bootstrap/Dropdown";
+import Toast from "react-bootstrap/Toast";
+import { useParams } from "react-router-dom";
+import "../../asset/css/product_detai.css";
+import { addCart } from "../../services/CartService";
+import { fetchAllProduct, getbyidProduct } from "../../services/ProductService";
 const Productdetail = () => {
+  const { idproduct } = useParams();
+  const [product, setProduct] = useState({});
+  const [quantity, setQuantity] = useState(1); // State cho quantity
+  const [toasts, setToasts] = useState([]); // State cho danh sách Toasts
 
-    
-    const { idproduct } = useParams();
-    const [product, setProduct] = useState({});
+  useEffect(() => {
+    fetchAllProduct();
+    window.scrollTo(0, 0); // Cuộn về đầu trang khi load
+    document.activeElement.blur(); // Bỏ focus khỏi các phần tử đang nhận focus
+  }, [idproduct]);
 
-    useEffect(() => {
-        fetchAllProduct();
-    }, [idproduct]);
+  const fetchAllProduct = async () => {
+    try {
+      const res = await getbyidProduct(idproduct);
+      setProduct(res);
+    } catch (error) {
+      console.error("Error fetching product:", error);
+    }
+  };
 
-    const fetchAllProduct = async () => {
-        try {
-            const res = await getbyidProduct(idproduct);
-            console.log('Fetched room:', res);
-            setProduct(res);
-        } catch (error) {
-            console.error('Error fetching room:', error);
-        }
-    };
-    
-    return (
-        <div className="container-fluid bg-f8f8f8">
+  const handleAddToCart = async (id) => {
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    const UserId = user.id;
+    const ProductId = id;
+    const response = await addCart(UserId, ProductId, quantity);
+    console.log("Response from server:", response);
+
+    // Thêm thông báo mới vào danh sách toasts
+    setToasts([...toasts, {
+      id: new Date().getTime(), // Tạo ID duy nhất cho mỗi toast
+      message: `Product added to cart successfully!`,
+      productName: product.nameProduct,
+      quantity: quantity,
+      img: product.img
+    }]);
+  };
+
+  const handleQuantityChange = (e) => {
+    const value = parseInt(e.target.value, 10);
+    if (value > 0) {
+      setQuantity(value); // Cập nhật quantity khi người dùng thay đổi input
+    }
+  };
+
+  return (
+    <>
+      <section id="common_banner_cart">
         <div className="container">
+          <div className="col-lg-12">
+            <div className="common_banner_cart_text">
+              <h1 className="text-center text-white">CART</h1>
+              <p className="text-center text_bread">Home / Product</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="content-product-detail">
+        <div className="container mt-5">
           <div className="row">
-            <div className="col-9">
-              <p className="fw-bolder fs-6">PRODUCT</p>
+            <div className="col-5">
+              <img src={product.img} alt="Product" className="img-product" />
             </div>
-            <div className="col-2 fs-6 fw-bolder text-secondary">HOME / PRODUCT</div>
-          </div>
-        </div>
-        <div className="content">
-          <div className="container">
-            <div className="row">
-              <div className="col-3 responsive_none brandsp">
-                <div className="row border border-1">
-                  <p></p>
-                  <p className="fw-bold">BRAND</p>
-                  <a href="#">Clothing</a>
-                  <a href="#">Bags</a>
-                  <a href="#">Footwear</a>
-                  <a href="#">Watches</a>
-                  <a href="#">Accessories</a>
-                  <p></p>
-                </div>
-                <div className="row border border-1 mt-2">
-                  <div className="row nt-1 mb-1">
-                    <div className="col-3">
-                      <i className="fa fa-truck-fast fs-3 mt-3 color-primary"></i>
-                    </div>
-                    <div className="col-9">
-                      <span className="font-size-small fw-bold">Free Shipping</span>
-                      <p className="font-size-small">Free Shipping World Wide</p>
-                    </div>
-                    <div className="hr-brandsp"></div>
-                  </div>
-                  <div className="row nt-1 mb-1">
-                    <div className="col-3">
-                      <i className="ion ion-stopwatch-outline fs-2 color-primary mt-3"></i>
-                    </div>
-                    <div className="col-9">
-                      <span className="font-size-small fw-bold">24/7 Service</span>
-                      <p className="font-size-small">Online Service For Customer</p>
-                    </div>
-                    <div className="hr-brandsp"></div>
-                  </div>
-                  <div className="row nt-1 mb-1">
-                    <div className="col-3">
-                      <i className="fa fa-bullhorn fs-3 mt-2 color-primary" style={{ transform: 'rotate(-45deg)' }}></i>
-                    </div>
-                    <div className="col-9">
-                      <span className="font-size-small fw-bold">Festival Offer</span>
-                      <p className="font-size-small">New Online Festival Offer</p>
-                    </div>
-                    <div className="hr-brandsp"></div>
-                  </div>
-                  <div className="row nt-1 mb-1">
-                    <div className="col-3">
-                      <i className="ion ion-card-outline fs-2 mt-3 color-primary"></i>
-                    </div>
-                    <div className="col-9">
-                      <span className="font-size-small fw-bold">Online Payment</span>
-                      <p className="font-size-small">Contrary To Popular Belief.</p>
-                    </div>
-                  </div>
-                </div>
+            <div className="col">
+              <h4>{product.nameProduct}</h4>
+              <p className="my-3 text-warning">
+                <i className="bi bi-star-fill"></i>
+                <i className="bi bi-star-fill"></i>
+                <i className="bi bi-star-fill"></i>
+                <i className="bi bi-star-fill"></i>
+                <i className="bi bi-star-fill"></i>
+              </p>
+              <h5 className="fw-bold my-3">$79</h5>
+              <p>{product.description}</p>
+              <DropDown>
+                <DropDown.Toggle className="buttondropdown">
+                  Size
+                </DropDown.Toggle>
+                <DropDown.Menu>
+                  <DropDown.Item href="#/action-1">S</DropDown.Item>
+                  <DropDown.Item href="#/action-2">M</DropDown.Item>
+                  <DropDown.Item href="#/action-3">L</DropDown.Item>
+                </DropDown.Menu>
+              </DropDown>
+              <div className="quantity mt-4 mb-4 fw-bold">
+                <p>Quantity</p>
+                <input
+                  type="number"
+                  className="text-center"
+                  value={quantity} // Liên kết giá trị của ô input với state
+                  onChange={handleQuantityChange} // Lắng nghe sự kiện onChange
+                  style={{ width: "40px" }}
+                />
               </div>
-              <div className="col-lg-8 col-sm-12">
-                <div className="row">
-                  <div className="col-lg-6 col-sm-12">
-                    <img src={product.img} alt="" className="imgsp" id="imgsp" />
-                    <div className="row">
-                      <div className="col-3">
-                        {/* <img
-                          src="./images/pro5.jpg"
-                          alt=""
-                          className="imgdes"
-                          id="imgdes"
-                          onClick={() => handleImageClick('./images/pro5.jpg')}
-                        /> */}
-                      </div>
-                      <div className="col-3 mx-auto">
-                        {/* <img
-                          src="./images/pro6.jpg"
-                          alt=""
-                          className="imgdes"
-                          id="imgdes"
-                          onClick={() => handleImageClick('./images/pro6.jpg')}
-                        /> */}
-                      </div>
-                      <div className="col-3">
-                        {/* <img
-                          src="./images/pro9.jpg"
-                          alt=""
-                          className="imgdes"
-                          id="imgdes"
-                          onClick={() => handleImageClick('./images/pro9.jpg')}
-                        /> */}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-lg-5 offset-1 col-sm-12">
-                    <span className="fs-2 fw-bolder">{product.nameProduct}</span>
-                    <p>
-                      <span className="fs-6 text-secondary text-decoration-line-through">{product.Price}</span>&ensp;
-                      <span className="fs-5 color-primary">40% Off</span>
-                    </p>
-                    <span className="fs-3">$87</span>
-                    <hr />
-                    <p className="fw-bold">Size</p>
-                    <span className="text-decoration-none fs-3 text-dark btnlinksize btnlinksize-active">M</span>&emsp;
-                    <span className="text-decoration-none fs-3 text-dark btnlinksize">XL</span>&emsp;
-                    <span className="text-decoration-none fs-3 text-dark btnlinksize">L</span>
-                    <p className="fw-bold mt-3">Quantity</p>
-                    <p className="pquanity">
-                      <button id="minus" className="buttonminus">
-                        <span className="fs-4 text-dark">
-                          <i className="fa fa-angle-left"></i>
-                        </span>
-                      </button>
-                      <span id="numberPlace">0</span>
-                      <button id="plus" className="buttonplus">
-                        <span className="fs-4 text-dark">
-                          <i className="fa fa-angle-right"></i>
-                        </span>
-                      </button>
-                    </p>
-                    <button className="buttonbuy" id="liveToastBtn">
-                      ADD TO CART
-                    </button>
-                    <button className="buttonbuy">BUY NOW</button>
-                    <hr />
-                    <p className="fw-bold">Product Detail</p>
-                    <p className="text-secondary font-size-small">
-                      It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.
-                    </p>
-                  </div>
-                </div>
-              </div>
+              <p className="mt-4 mb-4">
+                <i className="bi bi-heart"></i> Add To Wishlist
+              </p>
+              <a
+                onClick={() => handleAddToCart(product.id)}
+                className="btn_shopnow"
+              >
+                Add To Cart
+              </a>
             </div>
           </div>
-          
         </div>
-      </div>
-    );
+      </section>
 
-}
+      {/* Hiển thị danh sách Toasts */}
+      <div className="toast-container">
+        {toasts.map((toast) => (
+          <Toast
+            key={toast.id}
+            onClose={() => setToasts(toasts.filter(t => t.id !== toast.id))}
+            delay={3000}
+            autohide
+            className="mb-2"
+            style={{
+              maxWidth: '300px'
+            }}
+          >
+            <Toast.Header>
+              <strong className="me-auto text-success fw-bold fs-5">
+                Success
+                <i className="bi bi-check2-circle text-success"></i>
+              </strong>
+            </Toast.Header>
+            <Toast.Body className="bg-white">
+              <h6>{toast.message}</h6>
+              <div className="content-product-detail-toast bg-white">
+                <img src={toast.img} style={{ width: "60px" }} alt="" />
+                <span className="fw-bold mx-3">{toast.productName} x {toast.quantity}</span>
+              </div>
+            </Toast.Body>
+          </Toast>
+        ))}
+      </div>
+    </>
+  );
+};
 
 export default Productdetail;
