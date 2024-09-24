@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
 import Table from "react-bootstrap/Table";
-import { getbyidProduct, deleteProduct, fetchAllProduct } from "../../services/ProductService";
+import {
+  getbyidProduct,
+  deleteProduct,
+  fetchAllProduct,
+} from "../../services/ProductService";
 import ModalAddProduct from "./ModalAddProduct";
 import Button from "react-bootstrap/Button";
 import ModalEditProduct from "./ModalEditProduct";
@@ -10,7 +14,7 @@ import Nav from "../AdminComponents/Navs";
 import _ from "lodash";
 import "../../asset/css/table-product.css";
 import { format } from "date-fns";
-
+import * as XLSX from "xlsx"; // Import thư viện xlsx
 const MAX_DESCRIPTION_LENGTH = 30;
 
 const FormattedDate = ({ createdAt }) => {
@@ -19,7 +23,9 @@ const FormattedDate = ({ createdAt }) => {
 };
 
 const truncateDescription = (description, maxLength) => {
-  return description.length > maxLength ? description.substring(0, maxLength) + "..." : description;
+  return description.length > maxLength
+    ? description.substring(0, maxLength) + "..."
+    : description;
 };
 
 const TableProduct = () => {
@@ -40,7 +46,25 @@ const TableProduct = () => {
     setIsLoggedIn(!!session);
     setIsCheckingAuth(false);
   };
+  const exportToExcels = () => {
+    const dataToExport = filteredProducts.map((product, index) => ({
+      ID: index + 1,
+      Name: product.nameProduct,
+      Description: truncateDescription(
+        product.description,
+        MAX_DESCRIPTION_LENGTH
+      ),
+      Quantity: product.quantity,
+      Price: product.price,
+      CreatedAt: format(new Date(product.createdAt), "dd MMM yyyy, HH:mm"),
+    }));
 
+    const worksheet = XLSX.utils.json_to_sheet(dataToExport);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Products");
+
+    XLSX.writeFile(workbook, "products.xlsx");
+  };
   useEffect(() => {
     checkAuth();
   }, []);
@@ -73,7 +97,7 @@ const TableProduct = () => {
   };
 
   useEffect(() => {
-    const filtered = listProducts.filter(product =>
+    const filtered = listProducts.filter((product) =>
       product.nameProduct.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredProducts(filtered);
@@ -92,7 +116,7 @@ const TableProduct = () => {
       getProducts(1);
     }
   };
-
+  
   const handleShowGetByIdProduct = async (id) => {
     try {
       const res = await getbyidProduct(id);
@@ -112,10 +136,14 @@ const TableProduct = () => {
       <Nav />
       <div className="container">
         <div className="my-3 d-flex justify-content-between">
-          <span className="fs-3 text-white">List Product:</span>
-          <Button variant="success" onClick={() => setShow(true)}>Add new product</Button>
+          <div className="col-12">
+            <span className="fs-3 text-white ">List Product:</span>
+          </div>
         </div>
-        <div className="search-product-bar my-2">
+        
+        <div className="row d-flex justify-content-between">
+          <div className="col-4">
+          <div className="search-product-bar my-2">
           <input
             type="text"
             placeholder="Search.."
@@ -124,6 +152,19 @@ const TableProduct = () => {
             className="px-1 py-1 input_product_search"
           />
           <i className="bi bi-search btn btn-success"></i>
+        </div>
+          </div>
+          <div className="col-3 text-end">
+            <Button
+              variant="success"
+              className=""
+              onClick={() => setShow(true)}>
+              <i class="bi bi-plus-circle"></i> Add New
+            </Button>
+            <Button variant="primary" onClick={exportToExcels}>
+            <i class="bi bi-file-earmark-excel"></i> Export Excel
+            </Button>
+          </div>
         </div>
         <div id="collapse1" className="">
           <Table className="bg-white table-responsive">
@@ -145,15 +186,34 @@ const TableProduct = () => {
                   <td>{index + 1}</td>
                   <td>{product.nameProduct}</td>
                   <td>
-                    <img style={{ width: 80 }} src={product.img} alt={product.nameProduct} />
+                    <img
+                      style={{ width: 80 }}
+                      src={product.img}
+                      alt={product.nameProduct}
+                    />
                   </td>
-                  <td>{truncateDescription(product.description, MAX_DESCRIPTION_LENGTH)}</td>
+                  <td>
+                    {truncateDescription(
+                      product.description,
+                      MAX_DESCRIPTION_LENGTH
+                    )}
+                  </td>
                   <td>{product.quantity}</td>
                   <td>{product.price}</td>
-                  <td><FormattedDate createdAt={product.createdAt} /></td>
                   <td>
-                    <Button variant="warning" onClick={() => handleShowGetByIdProduct(product.id)}>Edit</Button>{" "}
-                    <Button variant="danger" onClick={() => handleDeleteProduct(product.id)}>Delete</Button>
+                    <FormattedDate createdAt={product.createdAt} />
+                  </td>
+                  <td>
+                    <Button
+                      variant="warning"
+                      onClick={() => handleShowGetByIdProduct(product.id)}>
+                      Edit
+                    </Button>{" "}
+                    <Button
+                      variant="danger"
+                      onClick={() => handleDeleteProduct(product.id)}>
+                      Delete
+                    </Button>
                   </td>
                 </tr>
               ))}

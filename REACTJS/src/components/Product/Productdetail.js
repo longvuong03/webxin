@@ -34,13 +34,16 @@ const Productdetail = () => {
     console.log("Response from server:", response);
 
     // Thêm thông báo mới vào danh sách toasts
-    setToasts([...toasts, {
-      id: new Date().getTime(), // Tạo ID duy nhất cho mỗi toast
-      message: `Product added to cart successfully!`,
-      productName: product.nameProduct,
-      quantity: quantity,
-      img: product.img
-    }]);
+    setToasts([
+      ...toasts,
+      {
+        id: new Date().getTime(), // Tạo ID duy nhất cho mỗi toast
+        message: `Product added to cart successfully!`,
+        productName: product.nameProduct,
+        quantity: quantity,
+        img: product.img,
+      },
+    ]);
   };
 
   const handleQuantityChange = (e) => {
@@ -104,8 +107,7 @@ const Productdetail = () => {
               </p>
               <a
                 onClick={() => handleAddToCart(product.id)}
-                className="btn_shopnow"
-              >
+                className="btn_shopnow">
                 Add To Cart
               </a>
             </div>
@@ -118,14 +120,13 @@ const Productdetail = () => {
         {toasts.map((toast) => (
           <Toast
             key={toast.id}
-            onClose={() => setToasts(toasts.filter(t => t.id !== toast.id))}
+            onClose={() => setToasts(toasts.filter((t) => t.id !== toast.id))}
             delay={3000}
             autohide
             className="mb-2"
             style={{
-              maxWidth: '300px'
-            }}
-          >
+              maxWidth: "300px",
+            }}>
             <Toast.Header>
               <strong className="me-auto text-success fw-bold fs-5">
                 Success
@@ -136,7 +137,9 @@ const Productdetail = () => {
               <h6>{toast.message}</h6>
               <div className="content-product-detail-toast bg-white">
                 <img src={toast.img} style={{ width: "60px" }} alt="" />
-                <span className="fw-bold mx-3">{toast.productName} x {toast.quantity}</span>
+                <span className="fw-bold mx-3">
+                  {toast.productName} x {toast.quantity}
+                </span>
               </div>
             </Toast.Body>
           </Toast>

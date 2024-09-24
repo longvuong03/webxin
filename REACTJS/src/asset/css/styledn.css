@@ -4,20 +4,20 @@
 .bg-f8f8f8 p{
 
 }
-.btnlogin a{
+.btnlogin{
   margin-top: 30px;
-  width: 90px;
+  width: 100px;
   font-size: 18px;
   padding: 8px 20px;
   border-radius: 3px;
   background-color: white ;
   border: 1px solid #ff4c3b;
 }
-.btnlogin a{
+.btnlogin {
 
   color: #ff4c3b !important;
 }
-.btnlogin:hover a{
+.btnlogin:hover{
   background-color: #ff4c3b;
   color: white !important;
 }

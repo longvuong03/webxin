@@ -1,179 +1,225 @@
-import React, { useState, useEffect } from 'react';
-import ReactPaginate from 'react-paginate';
-import Table from 'react-bootstrap/Table';
-import { getbyideUser, deleteUser, fetchAllUser } from '../../services/UserServices';
-import ModalAddUser from './ModalAddUser';
-import Button from 'react-bootstrap/Button';
-import ModalEditUser from './ModalEditUser';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import ReactPaginate from "react-paginate";
+import Table from "react-bootstrap/Table";
+import {
+  getbyideUser,
+  deleteUser,
+  fetchAllUser,
+} from "../../services/UserServices";
+import ModalAddUser from "./ModalAddUser";
+import Button from "react-bootstrap/Button";
+import ModalEditUser from "./ModalEditUser";
+import { useNavigate } from "react-router-dom";
 import Nav from "../AdminComponents/Navs";
-import _ from "lodash"
+import _ from "lodash";
 const TableUser = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [isCheckingAuth, setIsCheckingAuth] = useState(true);
-    const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
+  const navigate = useNavigate();
 
-    const [listUsers, setListUser] = useState([]);
-    const [totalUser, setTotalUser] = useState(0);
-    const [totalPage, setTotalPage] = useState(0);
+  const [listUsers, setListUser] = useState([]);
+  const [totalUser, setTotalUser] = useState(0);
+  const [totalPage, setTotalPage] = useState(0);
+  const [showPasswordColumn, setShowPasswordColumn] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
+  const [isShow, setShow] = useState(false);
+  const [isShowedit, setShowedit] = useState(false);
+  const [dataUserEdit, setDataUserEdit] = useState({});
+  const handleClose = () => {
+    setShow(false);
+    setShowedit(false);
+  };
+  const handleShow = () => setShow(true);
 
-    const [isShow, setShow] = useState(false);
-    const [isShowedit, setShowedit] = useState(false);
-    const [dataUserEdit, setDataUserEdit] = useState({});
-    const handleClose = () => { setShow(false); setShowedit(false) }
-    const handleShow = () => setShow(true);
+  const checkAuth = () => {
+    const session = sessionStorage.getItem("user");
+    console.log("Session storage:", session); // Kiểm tra dữ liệu session
+    const userIsAuthenticated = session ? true : false;
+    setIsLoggedIn(userIsAuthenticated);
+    setIsCheckingAuth(false);
+  };
 
-
-    const checkAuth = () => {
-        const session = sessionStorage.getItem('user');
-        console.log('Session storage:', session); // Kiểm tra dữ liệu session
-        const userIsAuthenticated = session ? true : false;
-        setIsLoggedIn(userIsAuthenticated);
-        setIsCheckingAuth(false); 
-    };
-
-    useEffect(() => {
-        checkAuth();
-    }, []);
-    useEffect(() => {
-        if (!isCheckingAuth) {
-            if (!isLoggedIn) {
-                navigate('/logins');
-            } else {
-                getUsers(1);
-            }
-        }
-    }, [isLoggedIn, isCheckingAuth, navigate]);
-    
-
-    if (isCheckingAuth) {
-        return <div>Loading...</div>;
+  useEffect(() => {
+    checkAuth();
+  }, []);
+  useEffect(() => {
+    if (!isCheckingAuth) {
+      if (!isLoggedIn) {
+        navigate("/logins");
+      } else {
+        getUsers(1);
+      }
     }
-    const handleUpdateTable = (user) => {
-        setListUser([user, ...listUsers]);
-    }
+  }, [isLoggedIn, isCheckingAuth, navigate]);
 
-    const handleEditUserFrommodal = (user) => {
-        let cloneListUser = _.cloneDeep(listUsers);
-        let index = listUsers.findIndex(item => item.id === user.id);
-        cloneListUser[index].first_name = user.first_name;
-        cloneListUser[index].last_name = user.last_name;
-        cloneListUser[index].email = user.email;
-        cloneListUser[index].avatar = user.avatar;
-        cloneListUser[index].password = user.password;
-        setListUser(cloneListUser);
-    }
-    // useEffect(() => {
-    //     getUsers(1);
-    // }, [])
-  
-    const getUsers = async (page) => {
-        try {
-            let res = await fetchAllUser(page);
-            if (res && res.length > 0) {
-                setTotalUser(res.total);
-                setListUser(res);
-                setTotalPage(Math.ceil(res.total_page)); 
-            } else {
-                console.log("No data received");
-            }
-        } catch (error) {
-            console.error("Error fetching users:", error); // Log any errors
-        }
-    }
+  if (isCheckingAuth) {
+    return <div>Loading...</div>;
+  }
+  const handleUpdateTable = (user) => {
+    setListUser([user, ...listUsers]);
+  };
 
+  const handleEditUserFrommodal = (user) => {
+    let cloneListUser = _.cloneDeep(listUsers);
+    let index = listUsers.findIndex((item) => item.id === user.id);
+    cloneListUser[index].first_name = user.first_name;
+    cloneListUser[index].last_name = user.last_name;
+    cloneListUser[index].email = user.email;
+    cloneListUser[index].avatar = user.avatar;
+    cloneListUser[index].password = user.password;
+    setListUser(cloneListUser);
+  };
+  // useEffect(() => {
+  //     getUsers(1);
+  // }, [])
 
-    const handlePageClick = (event) => {
-        getUsers(event.selected + 1);
+  const getUsers = async (page) => {
+    try {
+      let res = await fetchAllUser(page);
+      if (res && res.length > 0) {
+        setTotalUser(res.total);
+        setListUser(res);
+        setTotalPage(Math.ceil(res.total_page));
+      } else {
+        console.log("No data received");
+      }
+    } catch (error) {
+      console.error("Error fetching users:", error); // Log any errors
     }
-    const handleDeleteUser = async (id) => {
-        try {
-            await deleteUser(id);
-            getUsers(1);
-        } catch (error) {
-            console.error("Error delete user:", error);
-            getUsers(1);
-        }
+  };
+  const handleSearch = () => {
+    return _.sortBy(
+      listUsers.filter(
+        (user) =>
+          user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          user.first_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          user.last_name.toLowerCase().includes(searchTerm.toLowerCase())
+      ),
+      ["id"]
+    );
+  };
+
+  const handlePageClick = (event) => {
+    getUsers(event.selected + 1);
+  };
+  const handleDeleteUser = async (id) => {
+    try {
+      await deleteUser(id);
+      getUsers(1);
+    } catch (error) {
+      console.error("Error delete user:", error);
+      getUsers(1);
     }
-    const handleShowGetbyideUser = async (id) => {
-        try {
-            let res = await getbyideUser(id);
-            if (res && res.id) {
-                setDataUserEdit(res);
-                setShowedit(true);
-            } else {
-                console.log("No data received");
-            }
-        } catch (error) {
-            console.error("Error fetching users:", error); // Log any errors
-        }
+  };
+  const handleShowGetbyideUser = async (id) => {
+    try {
+      let res = await getbyideUser(id);
+      if (res && res.id) {
+        setDataUserEdit(res);
+        setShowedit(true);
+      } else {
+        console.log("No data received");
+      }
+    } catch (error) {
+      console.error("Error fetching users:", error); // Log any errors
     }
-    return (
-        <>
-        <Nav />
-        <div className="container">
-            <div className="my-3 d-flex justify-content-between">
-                <span className='fs-3 text-white'>List User:</span>
-                <button className='btn btn-success' onClick={handleShow}>Add new user</button>
+  };
+  return (
+    <>
+      <Nav />
+      <div className="container">
+        <div className="my-3 d-flex justify-content-between">
+          <span className="fs-3 text-white">List User:</span>
+        </div>
+        <div className="row d-flex justify-content-between">
+          <div className="col-4">
+            <div className="search-product-bar my-2">
+              <input
+                type="text"
+                placeholder="Search.."
+                className="px-1 py-1 input_product_search"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)} // Cập nhật giá trị tìm kiếm
+              />
+
+              <i className="bi bi-search btn btn-success"></i>
             </div>
-            <Table className='bg-white'>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Email</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Password</th>
-                        <th>Role</th>
-                        <th>Option</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {listUsers && listUsers.length > 0 && listUsers.map((user, index) => {
-                        return (
-                            <tr key={index}>
-                                <td>{user.id}</td>
-                                <td>{user.email}</td>
-                                <td>{user.first_name}</td>
-                                <td>{user.last_name}</td>
-                                <td>{user.password}</td>
-                                <td>{user.avatar}</td>
-                                <td>
-                                    <Button onClick={() => handleShowGetbyideUser(user.id)} variant="warning">Edit</Button>{' '}
-                                    <Button onClick={() => handleDeleteUser(user.id)} variant="danger">Delete</Button>{' '}
-                                </td>
-                            </tr>
-                        )
-                    })}
-                </tbody>
-                
-            </Table>
-            <ReactPaginate
-                breakLabel="..."
-                nextLabel="next >"
-                onPageChange={handlePageClick}
-                pageRangeDisplayed={5}
-                pageCount={totalPage}
-                previousLabel="< previous"
-
-                pageClassName="page-item"
-                pageLinkClassName="page-link"
-                previousClassName="page-item"
-                previousLinkClassName="page-link"
-                nextClassName='page-item'
-                nextLinkClassName="page-link"
-                breakClassName='page-item'
-                breakLinkClassName='page-link'
-                containerClassName='pagination'
-                activeClassName='active'
-            />
-            <ModalAddUser show={isShow} handleClose={handleClose} handleUpdateTable={handleUpdateTable} />
-            <ModalAddUser show={isShow} handleClose={handleClose} handleUpdateTable={handleUpdateTable} />
-            <ModalEditUser show={isShowedit} handleClose={handleClose} dataUserEdit={dataUserEdit} handleEditUserFrommodal={handleEditUserFrommodal} />
-            </div>
-        </>
-    )
-}
+          </div>
+          <div className="col-4 text-end">
+            <button className="btn btn-success" onClick={handleShow}>
+              Add new user
+            </button>
+            <button
+              className="btn btn-primary"
+              style={{ width: "190px" }} // Đặt chiều rộng cố định
+              onClick={() => setShowPasswordColumn(!showPasswordColumn)}
+            >
+              {showPasswordColumn ? (
+                <>
+                  <i className="bi bi-eye-slash"></i> Hide Password
+                </>
+              ) : (
+                <>
+                  <i className="bi bi-eye"></i> Show Password
+                </>
+              )}
+            </button>
+          </div>
+        </div>
+        <Table className="bg-white">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Email</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Password</th>
+              <th>Role</th>
+              <th>Option</th>
+            </tr>
+          </thead>
+          <tbody>
+  {handleSearch().map((user, index) => (
+    <tr key={index}>
+      <td>{index + 1}</td> {/* Số thứ tự */}
+      <td>{user.email}</td>
+      <td>{user.first_name}</td>
+      <td>{user.last_name}</td>
+      <td>{showPasswordColumn ? user.password : "*".repeat(8)}</td>
+      <td>{user.avatar}</td>
+      <td>
+        <Button onClick={() => handleShowGetbyideUser(user.id)} variant="warning">
+          Edit
+        </Button>{" "}
+        <Button onClick={() => handleDeleteUser(user.id)} variant="danger">
+          Delete
+        </Button>{" "}
+      </td>
+    </tr>
+  ))}
+</tbody>
+        </Table>
+       
+        <ModalAddUser
+          show={isShow}
+          handleClose={handleClose}
+          handleUpdateTable={handleUpdateTable}
+        />
+        <ModalAddUser
+          show={isShow}
+          handleClose={handleClose}
+          handleUpdateTable={handleUpdateTable}
+        />
+        <ModalEditUser
+          show={isShowedit}
+          handleClose={handleClose}
+          dataUserEdit={dataUserEdit}
+          handleEditUserFrommodal={handleEditUserFrommodal}
+        />
+      </div>
+    </>
+  );
+};
 
 export default TableUser;

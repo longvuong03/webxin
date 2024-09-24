@@ -104,28 +104,31 @@ namespace WebApi.Controllers
             }
 
             var email = model.email;
-            var password = model.password;
+            var password = GetMD5(model.password); // Mã hóa mật khẩu nhập vào
+
             var user = await _context.Users.FirstOrDefaultAsync(u => u.email == email && u.password == password);
 
             if (user == null)
             {
                 return BadRequest(new { message = "Invalid email or password" });
             }
+
             return user;
         }
 
-       /* [HttpPost("login")]
-        public async Task<ActionResult<User>> Login(UserLoginModel model)
-        {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.email == model.email && u.password == model.password);
 
-            if (user == null)
-            {
-                return NotFound("Invalid email or password}");
-            }
+        /* [HttpPost("login")]
+         public async Task<ActionResult<User>> Login(UserLoginModel model)
+         {
+             var user = await _context.Users.FirstOrDefaultAsync(u => u.email == model.email && u.password == model.password);
 
-            return user;
-        }*/
+             if (user == null)
+             {
+                 return NotFound("Invalid email or password}");
+             }
+
+             return user;
+         }*/
 
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] User user)
@@ -138,7 +141,8 @@ namespace WebApi.Controllers
                     return BadRequest("Email already exists");
                 }
 
-                user.password = user.password;
+                // Mã hóa mật khẩu bằng MD5 trước khi lưu
+                user.password = GetMD5(user.password);
                 _context.Users.Add(user);
                 await _context.SaveChangesAsync();
 
@@ -147,6 +151,7 @@ namespace WebApi.Controllers
 
             return BadRequest(ModelState);
         }
+
         private string GetMD5(string input)
         {
             // MD5 hash generation logic

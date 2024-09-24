@@ -85,8 +85,7 @@ function Order() {
                   <td>
                     <Button
                       variant="danger"
-                      onClick={() => handleDelete(item.orderDetail.id)}
-                    >
+                      onClick={() => handleDelete(item.orderDetail.id)}>
                       Cancel
                     </Button>
                   </td>
