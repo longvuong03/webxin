@@ -16,14 +16,15 @@ namespace WebApi.Controllers
         private readonly OrderService _orderService;
         private readonly OrderDetailsService _orderDetailsService;
         private readonly ProductService _productService;
-
-        public OrderController(CartDetailsService cartDetailsService, CartService cartService, OrderService orderService, OrderDetailsService orderDetailsService, ProductService productService)
+        private readonly UserService _userService; // Thêm UserService
+        public OrderController(CartDetailsService cartDetailsService, CartService cartService, OrderService orderService, OrderDetailsService orderDetailsService, ProductService productService, UserService userService)
         {
             _cartDetailsService = cartDetailsService;
             _cartService = cartService;
             _orderService = orderService;
             _orderDetailsService = orderDetailsService;
             _productService = productService;
+            _userService = userService; // Khởi tạo UserService
         }
         [HttpGet("AddOrder")]
         public async Task<IActionResult> AddOrder(int UserId)
@@ -107,6 +108,58 @@ namespace WebApi.Controllers
 
             return Ok(modeldatas);
         }
+        [HttpGet("listallorders")]
+        public async Task<IActionResult> ListAllOrders()
+        {
+            // Lấy tất cả các đơn hàng
+            var orders = await _orderService.GetAllOrdersAsync();
+
+            // Nếu không có đơn hàng, trả về danh sách rỗng
+            if (orders == null || !orders.Any())
+            {
+                return Ok(new List<Modeldata>());
+            }
+
+            List<Modeldata> modeldatas = new List<Modeldata>();
+
+            foreach (var order in orders)
+            {
+                var orderDetails = await _orderDetailsService.GetOrderDetailsByOrderIdAsync(order.Id);
+
+                // Kiểm tra nếu UserId không null trước khi lấy thông tin người dùng
+                string userName = "Unknown"; // Giá trị mặc định nếu không tìm thấy người dùng
+                if (order.UserId.HasValue) // Kiểm tra UserId có giá trị không
+                {
+                    var user = await _userService.GetUserByIdAsync(order.UserId.Value); // Sử dụng Value để lấy giá trị của int?
+                    if (user != null) // Kiểm tra nếu user tồn tại
+                    {
+                        userName = $"{user.first_name} {user.last_name}"; // Kết hợp tên và họ
+                    }
+                }
+
+                foreach (var item in orderDetails)
+                {
+                    Products product = await _productService.GetProductByIdAsync(item.ProductId);
+                    product.OrderDetails = null;
+
+                    // Khởi tạo đối tượng Modeldata
+                    var modeldata = new Modeldata()
+                    {
+                        OrderDetail = item,
+                        Products = product,
+                        UserName = userName // Sử dụng tên người dùng đã lấy
+                    };
+
+                    item.Product = null;
+                    item.Order = null;
+                    modeldatas.Add(modeldata);
+                }
+            }
+
+            return Ok(modeldatas);
+        }
+
+
 
 
     }

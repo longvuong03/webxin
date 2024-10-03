@@ -127,11 +127,11 @@ const TableUser = () => {
   };
   return (
     <>
-      <Nav />
-      <div className="container">
-        <div className="my-3 d-flex justify-content-between">
-          <span className="fs-3 text-white">List User:</span>
-        </div>
+      <div className="container-fluid">
+      <div>
+      <p className="mt-3 text-secondary">Pages/Dashboard/User</p>
+      <p className="fs-3 fw-bold">Main User</p>
+          </div>
         <div className="row d-flex justify-content-between">
           <div className="col-4">
             <div className="search-product-bar my-2">
@@ -187,7 +187,15 @@ const TableUser = () => {
       <td>{user.first_name}</td>
       <td>{user.last_name}</td>
       <td>{showPasswordColumn ? user.password : "*".repeat(8)}</td>
-      <td>{user.avatar}</td>
+      <td>
+        <span
+          className={`badge ${
+            user.avatar === "1" ? "bg-success" : user.avatar === "2" ? "bg-danger" : ""
+          }`}
+        >
+          {user.avatar === "1" ? "Admin" : user.avatar === "2" ? "User" : "Unknown"}
+        </span>
+      </td>
       <td>
         <Button onClick={() => handleShowGetbyideUser(user.id)} variant="warning">
           Edit

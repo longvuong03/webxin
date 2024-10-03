@@ -1,14 +1,8 @@
 #collapse1{
     overflow-y:scroll;
-    height:620px;
+    height:710px;
 }
-.table-responsive th{
-    position: sticky;
-    top: 0;
-    background-color: white; /* Đặt màu nền cho tiêu đề để nhìn rõ khi cuộn */  
-    z-index: 1; /* Đảm bảo tiêu đề luôn ở trên cùng */
-    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1); /* Thêm bóng đổ cho hiệu ứng nổi */
-}
+
 .description-container {
     width: 40px; /* Điều chỉnh kích thước để phù hợp với bảng */
     white-space: nowrap;

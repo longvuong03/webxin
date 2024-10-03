@@ -8,7 +8,7 @@ import TableUser from "./components/UserComponents/TableUser";
 import TableProduct from "./components/Product/TableProduct";
 import Order from "./components/OrderComponents/Order";
 import Register from "./components/Home/Register";
-
+import TableOrder from "./components/OrderComponents/TableOrder"
 import Home from "./components/AdminComponents/Home";
 import LoginForm from "./components/Home/Login";
 import Product from "./components/Product/Product";
@@ -17,6 +17,7 @@ import MainLayout from "./components/AdminComponents/MainLayout";
 import AdminLayout from "./components/AdminComponents/AdminLayout";
 import Sidebar from "./components/AdminComponents/Sidebar";
 import Cart from "./components/CartComponents/Cart";
+import './asset/css/dashboard-home.css'; // Chứa CSS của em
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -123,7 +124,7 @@ function App() {
                 userInfo={userInfo}
                 handleLogout={handleLogout}
               >
-                <div className="container-fluid bg-secondary min-vh-100">
+                <div className="container-fluid bg-dashboard min-vh-100">
                   <div className="row">
                     <div className="col-2 vh-100 bg-white">
                       <Sidebar
@@ -137,6 +138,7 @@ function App() {
                         <Route path="home" element={<Home />} />
                         <Route path="users" element={<TableUser />} />
                         <Route path="products" element={<TableProduct />} />
+                        <Route path="orders" element={<TableOrder />} />
                         {/* Add other admin routes here */}
                       </Routes>
                     </div>

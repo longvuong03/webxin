@@ -21,47 +21,47 @@ const Register = () => {
 
     const handleRegister = async (e) => {
         e.preventDefault();
-    
+
         // Reset lỗi
         setEmailError('');
         setPasswordError('');
         setFirstNameError('');
         setLastNameError('');
         setErrorMessage('');
-    
+
         let valid = true;
-    
+
         // Kiểm tra email
         if (!validateEmail(email)) {
             setEmailError('Please enter a valid email.');
             valid = false;
         }
-    
+
         // Kiểm tra password
         if (password.length < 8) {
             setPasswordError('Password must be at least 8 characters.');
             valid = false;
         }
-    
+
         // Kiểm tra firstName
         if (firstName.trim() === '') {
             setFirstNameError('First name cannot be empty.');
             valid = false;
         }
-    
+
         // Kiểm tra lastName
         if (lastName.trim() === '') {
             setLastNameError('Last name cannot be empty.');
             valid = false;
         }
-    
+
         if (!valid) return;
-    
+
         try {
             const response = await registerUser(email, firstName, lastName, password);
             if (response.status === 200 || response.status === 201) {
                 alert('Registration successful!');
-                navigate('/logins'); 
+                navigate('/logins');
             } else {
                 setErrorMessage('Registration failed. Please try again.');
             }
@@ -70,7 +70,7 @@ const Register = () => {
             setErrorMessage('Registration failed. Email may already be in use.');
         }
     };
-    
+
 
     return (
         <div className="register-container">
@@ -98,7 +98,6 @@ const Register = () => {
                                         {emailError && <div className="invalid-feedback">{emailError}</div>}
                                     </div>
                                 </div>
-
                                 <div className="row mt-3">
                                     <label htmlFor="validationCustomFirstName" className="form-label fw-bolder">First Name</label>
                                     <div className="input-group has-validation">
@@ -109,13 +108,12 @@ const Register = () => {
                                             id="validationCustomFirstName"
                                             value={firstName}
                                             onChange={(e) => setFirstName(e.target.value)}
-                                            placeholder="Enter First Name"  
+                                            placeholder="Enter First Name"
                                             required
                                         />
                                         {firstNameError && <div className="invalid-feedback">{firstNameError}</div>}
                                     </div>
                                 </div>
-
                                 <div className="row mt-3">
                                     <label htmlFor="validationCustomLastName" className="form-label fw-bolder">Last Name</label>
                                     <div className="input-group has-validation">
@@ -132,7 +130,6 @@ const Register = () => {
                                         {lastNameError && <div className="invalid-feedback">{lastNameError}</div>}
                                     </div>
                                 </div>
-
                                 <div className="row mt-2">
                                     <label htmlFor="validationCustomPassword" className="form-label fw-bolder">Password</label>
                                     <div className="input-group has-validation">
@@ -155,7 +152,7 @@ const Register = () => {
                                 </div>
                             </form>
 
-                            {/* Social Signup */}
+
                             <div className="row mt-4 mb-4 loginsocial">
                                 <div className="col-6">
                                     <span className="fontchulogin fw-bold">
@@ -171,7 +168,7 @@ const Register = () => {
                         </div>
                     </div>
 
-                    {/* Additional Info Section */}
+ 
                     <div className="col-lg-5 col-sm-12 mt-5 mx-auto">
                         <div className="row">
                             <p className="fs-3 fw-bold">NEW CUSTOMER</p>

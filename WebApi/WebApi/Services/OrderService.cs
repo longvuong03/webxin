@@ -13,7 +13,18 @@ namespace WebApi.Services
         {
             _context = context;
         }
-
+        public async Task<List<OrderDTO>> GetAllOrdersAsync()
+        {
+            return await _context.Orders
+                .Select(order => new OrderDTO
+                {
+                    Id = order.Id,
+                    OrderDate = order.CreatedAt,
+                    UserId = order.UserId,
+                    TotalAmount = order.TotalPrice
+                })
+                .ToListAsync();
+        }
         public async Task<List<OrderDTO>> GetOrdersAsync()
         {
             return await _context.Orders

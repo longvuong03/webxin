@@ -1,9 +1,11 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using WebApi.Data;
 using WebApi.Services;
-
+using StackExchange.Redis;
 var builder = WebApplication.CreateBuilder(args);
+// Đọc cấu hình Redis từ appsettings.json
 
+// Thiết lập kết nối Redis
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<CartDetailsService>();
 builder.Services.AddScoped<CartService>();
@@ -12,7 +14,11 @@ builder.Services.AddScoped<OrderDetailsService>();
 builder.Services.AddScoped<OrderService>();
 
 
-// Add services to the container.
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = builder.Configuration.GetConnectionString("RedisConnection");
+    options.InstanceName = "SampleInstance";
+});
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

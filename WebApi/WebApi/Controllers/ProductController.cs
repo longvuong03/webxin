@@ -21,7 +21,7 @@ namespace WebApi.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Products>>> GetProducts(int page = 1)
         {
-            const int pageSize = 10;
+            const int pageSize = 1000;
             var products = await _context.Product
                 .OrderByDescending(p => p.id)
                 .Skip((page - 1) * pageSize)

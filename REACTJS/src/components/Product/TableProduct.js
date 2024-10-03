@@ -29,6 +29,8 @@ const truncateDescription = (description, maxLength) => {
 };
 
 const TableProduct = () => {
+  const [sortConfig, setSortConfig] = useState({ key: "", direction: "" });
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
   const [listProducts, setListProducts] = useState([]);
@@ -46,6 +48,16 @@ const TableProduct = () => {
     setIsLoggedIn(!!session);
     setIsCheckingAuth(false);
   };
+  const handleSort = (key) => {
+    let direction = "asc";
+    if (sortConfig.key === key && sortConfig.direction === "asc") {
+      direction = "desc";
+    }
+    const sortedData = _.orderBy(filteredProducts, [key], [direction]);
+    setFilteredProducts(sortedData);
+    setSortConfig({ key, direction });
+  };
+  
   const exportToExcels = () => {
     const dataToExport = filteredProducts.map((product, index) => ({
       ID: index + 1,
@@ -55,7 +67,7 @@ const TableProduct = () => {
         MAX_DESCRIPTION_LENGTH
       ),
       Quantity: product.quantity,
-      Price: product.price,
+      Price: "$"+ product.price  ,
       CreatedAt: format(new Date(product.createdAt), "dd MMM yyyy, HH:mm"),
     }));
 
@@ -133,11 +145,12 @@ const TableProduct = () => {
 
   return (
     <>
-      <Nav />
-      <div className="container">
-        <div className="my-3 d-flex justify-content-between">
-          <div className="col-12">
-            <span className="fs-3 text-white ">List Product:</span>
+
+      <div className="container-fluid">
+        <div className=" d-flex justify-content-between">
+        <div>
+      <p className="mt-3 text-secondary">Pages/Dashboard/Product</p>
+      <p className="fs-3 fw-bold">Main Dashboard</p>
           </div>
         </div>
         
@@ -168,15 +181,33 @@ const TableProduct = () => {
         </div>
         <div id="collapse1" className="">
           <Table className="bg-white table-responsive">
-            <thead>
+          <thead>
               <tr>
-                <th>ID</th>
-                <th>Name</th>
+                <th onClick={() => handleSort("id")}>
+                  ID{" "}
+                  {sortConfig.key === "id" && (sortConfig.direction === "asc" ? "▲" : "▼")}
+                </th>
+                <th onClick={() => handleSort("nameProduct")}>
+                  Name{" "}
+                  {sortConfig.key === "nameProduct" && (sortConfig.direction === "asc" ? "▲" : "▼")}
+                </th>
                 <th>Image</th>
-                <th>Description</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>Create At</th>
+                <th onClick={() => handleSort("description")}>
+                  Description{" "}
+                  {sortConfig.key === "description" && (sortConfig.direction === "asc" ? "▲" : "▼")}
+                </th>
+                <th onClick={() => handleSort("quantity")}>
+                  Quantity{" "}
+                  {sortConfig.key === "quantity" && (sortConfig.direction === "asc" ? "▲" : "▼")}
+                </th>
+                <th onClick={() => handleSort("price")}>
+                  Price{" "}
+                  {sortConfig.key === "price" && (sortConfig.direction === "asc" ? "▲" : "▼")}
+                </th>
+                <th onClick={() => handleSort("createdAt")}>
+                  Create At{" "}
+                  {sortConfig.key === "createdAt" && (sortConfig.direction === "asc" ? "▲" : "▼")}
+                </th>
                 <th>Option</th>
               </tr>
             </thead>
@@ -220,24 +251,7 @@ const TableProduct = () => {
             </tbody>
           </Table>
         </div>
-        <ReactPaginate
-          breakLabel="..."
-          nextLabel="next >"
-          onPageChange={handlePageClick}
-          pageRangeDisplayed={5}
-          pageCount={totalPage}
-          previousLabel="< previous"
-          pageClassName="page-item"
-          pageLinkClassName="page-link"
-          previousClassName="page-item"
-          previousLinkClassName="page-link"
-          nextClassName="page-item"
-          nextLinkClassName="page-link"
-          breakClassName="page-item"
-          breakLinkClassName="page-link"
-          containerClassName="pagination"
-          activeClassName="active"
-        />
+
         <ModalAddProduct
           show={isShow}
           handleClose={() => setShow(false)}

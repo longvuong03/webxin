@@ -1,44 +1,56 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
-import {Nav, NavDropdown} from 'react-bootstrap'
-import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { NavDropdown } from 'react-bootstrap';
+import '../../asset/css/sb.css'; // Chứa CSS của em
 var Diamond = require('../../asset/image/logo.png');
+
 const Sidebar = ({ isLoggedIn, userInfo, handleLogout }) => {
-  return (
-    <div className="bg-white">
-        <div className='m-3'>
-          <img src={Diamond} alt=""/>
-        </div>
-        <hr className='text-dark' />
-        <div className="list-group list-group-flush tex">
-            <a className='list-group-item py-2'>
-            <i class="bi bi-speedometer2 fs-4 me-3"></i>
-                <span className='fs-5'>Dashboard</span>
-            </a>
-            <a className='list-group-item py-2 d-flex'>
-                <i className='bi bi-house fs-4 me-3'></i>
-                <span className='fs-5'><Nav.Link class="nav-link active  responsive_none" as={NavLink} to="/admin/home" aria-current="page">Home</Nav.Link></span>
-            </a>
-            <a className='list-group-item py-2 d-flex'>
-                <i className='bi bi-table fs-5 me-3'></i>
-                <span className='fs-5'><Nav.Link class="nav-link active  responsive_none" as={NavLink} to="/admin/products" aria-current="page">Product</Nav.Link></span>
-            </a>
-            <a className='list-group-item py-2'>
-                <i className='bi bi-clipboard-data fs-5 me-3'></i>
-                <span className='fs-5'>Report</span>
-            </a>
-            <a className='list-group-item py-2 d-flex'>
-                <i className='bi bi-people fs-5 me-3'></i>
-                <span className='fs-5'><Nav.Link class="nav-link active  responsive_none" as={NavLink} to="/admin/users" aria-current="page">User</Nav.Link></span>
-            </a>
-            <a className='list-group-item py-2 d-flex'>
-            <i class="bi bi-card-checklist fs-5 me-3"></i>
-                <span className='fs-5'><Nav.Link class="nav-link active  responsive_none" as={NavLink} to="/admin/orders" aria-current="page">Orders</Nav.Link></span>
-            </a>
-            <a className='list-group-item py-2 d-flex'>
-                <i className='bi bi-lock fs-5 me-3'></i>
-                <span className='fs-5'>{isLoggedIn ? (
+    return (
+        <div className="bg-white">
+            <div className="row">
+                <img src={Diamond} alt="" style={{ width: '60%', margin: '0 auto' }} />
+            </div>
+            <div className="px-3 mt-4 d-flex flex-column">
+                <NavLink
+                    to="/admin/home"
+                    className={({ isActive }) =>
+                        isActive ? 'active-link list-group-item py-2 d-flex' : 'list-group-item py-2 d-flex'
+                    }
+                >
+                    <i class="bi bi-house-door-fill fs-5 me-3"></i>
+                    <span className="fs-5">DashBoard</span>
+                </NavLink>
+                <NavLink
+                    to="/admin/products"
+                    className={({ isActive }) =>
+                        isActive ? 'active-link list-group-item py-2 d-flex' : 'list-group-item py-2 d-flex'
+                    }
+                >
+                    <i className="bi bi-table fs-5 me-3"></i>
+                    <span className="fs-5">Product</span>
+                </NavLink>
+                <NavLink
+                    to="/admin/users"
+                    className={({ isActive }) =>
+                        isActive ? 'active-link list-group-item py-2 d-flex' : 'list-group-item py-2 d-flex'
+                    }
+                >
+                    <i className="bi bi-person fs-5 me-3"></i>
+                    <span className="fs-5">User</span>
+                </NavLink>
+                <NavLink
+                    to="/admin/orders"
+                    className={({ isActive }) =>
+                        isActive ? 'active-link list-group-item py-2 d-flex' : 'list-group-item py-2 d-flex'
+                    }
+                >
+                    <i className="bi bi-person fs-5 me-3"></i>
+                    <span className="fs-5">Order</span>
+                </NavLink>
+                <a className="list-group-item py-2 d-flex">
+                    <i className="bi bi-lock fs-5 me-3"></i>
+                    <span className="fs-5">
+                        {isLoggedIn ? (
                             <NavDropdown title={userInfo?.first_name || 'User'}>
                                 <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
                             </NavDropdown>
@@ -46,11 +58,12 @@ const Sidebar = ({ isLoggedIn, userInfo, handleLogout }) => {
                             <NavDropdown title="Setting">
                                 <NavDropdown.Item href="/logins">Login</NavDropdown.Item>
                             </NavDropdown>
-                        )}</span>
-            </a>
+                        )}
+                    </span>
+                </a>
+            </div>
         </div>
-    </div>
-  )
-}
+    );
+};
 
-export default Sidebar
+export default Sidebar;

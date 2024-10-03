@@ -49,6 +49,10 @@
               "target": "Package",
               "version": "[3.3.0, )"
             },
+            "MailKit": {
+              "target": "Package",
+              "version": "[4.7.1, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[7.0.12, )"
@@ -70,6 +74,14 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.0, )"
+            },
+            "Microsoft.Extensions.Caching.StackExchangeRedis": {
+              "target": "Package",
+              "version": "[8.0.8, )"
+            },
+            "StackExchange.Redis": {
+              "target": "Package",
+              "version": "[2.8.16, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
